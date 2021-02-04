@@ -1,0 +1,107 @@
+{
+  "name": "qr-screen-reader",
+  "version": "1.0.0",
+  "description": "QR Screen Reader",
+  "keywords": [],
+  "license": "MIT",
+  "author": {
+    "name": "Rasmus Nørskov",
+    "email": "rasmus@norskov.org"
+  },
+  "main": ".webpack/main",
+  "scripts": {
+    "lint": "eslint --ext .ts .",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "start": "electron-forge start"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "QR Screen Reader"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.tsx",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "jsqr": "^1.3.1",
+    "lodash": "^4.17.20",
+    "react": "^17.0.1",
+    "react-copy-to-clipboard": "^5.0.3",
+    "react-dom": "^17.0.1",
+    "screenshot-desktop": "^1.12.3",
+    "sharp": "^0.27.1",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.54",
+    "@electron-forge/maker-deb": "6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.54",
+    "@electron-forge/maker-zip": "6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@svgr/webpack": "^5.5.0",
+    "@types/lodash": "^4.14.168",
+    "@types/pngjs": "^3.4.2",
+    "@types/react": "^17.0.1",
+    "@types/react-copy-to-clipboard": "^5.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/sharp": "^0.27.1",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "babel-eslint": "^10.0.0",
+    "electron": "11.2.2",
+    "eslint": "^7.19.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
+    "node-loader": "0.6.0",
+    "ts-loader": "^8.0.14",
+    "typescript": "^4.1.3"
+  },
+  "productName": "QR Screen Reader"
+}
